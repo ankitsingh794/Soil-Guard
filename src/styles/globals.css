@@ -1,0 +1,185 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Import Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    @apply bg-white text-soil-800 antialiased;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Focus styles for accessibility */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-botanical-500 ring-offset-2;
+  }
+}
+
+@layer components {
+  /* Button Variants */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply bg-botanical-500 text-white hover:bg-botanical-600 focus-visible:ring-botanical-500 shadow-sm hover:shadow-md;
+  }
+
+  .btn-secondary {
+    @apply bg-soil-500 text-white hover:bg-soil-600 focus-visible:ring-soil-500 shadow-sm hover:shadow-md;
+  }
+
+  .btn-outline {
+    @apply border-2 border-soil-500 text-soil-500 hover:bg-soil-50 focus-visible:ring-soil-500;
+  }
+
+  .btn-ghost {
+    @apply text-soil-700 hover:bg-sand-100 focus-visible:ring-soil-500;
+  }
+
+  .btn-sm {
+    @apply px-4 py-2 text-sm;
+  }
+
+  .btn-md {
+    @apply px-6 py-3 text-base;
+  }
+
+  .btn-lg {
+    @apply px-8 py-4 text-lg;
+  }
+
+  /* Card Components */
+  .card {
+    @apply bg-white rounded-lg shadow-card transition-shadow duration-300 overflow-hidden;
+  }
+
+  .card-hover {
+    @apply hover:shadow-card-hover;
+  }
+
+  /* Input Fields */
+  .input {
+    @apply w-full rounded-lg border border-soil-300 bg-white px-4 py-2.5 text-soil-800 placeholder:text-soil-400 focus:border-botanical-500 focus:ring-2 focus:ring-botanical-500 focus:ring-offset-0 transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  /* Container */
+  .container-custom {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Section spacing */
+  .section-spacing {
+    @apply py-12 md:py-16 lg:py-24;
+  }
+
+  /* Gradient overlays */
+  .gradient-overlay {
+    @apply absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-soil-900/60;
+  }
+
+  /* Product badge */
+  .badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold;
+  }
+
+  .badge-success {
+    @apply bg-botanical-100 text-botanical-700;
+  }
+
+  .badge-warning {
+    @apply bg-accent-warning/10 text-accent-warning;
+  }
+
+  .badge-info {
+    @apply bg-soil-100 text-soil-700;
+  }
+}
+
+@layer utilities {
+  /* Custom scrollbar */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    @apply bg-sand-100 rounded;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-soil-400 rounded hover:bg-soil-500;
+  }
+
+  /* Text gradients */
+  .text-gradient {
+    @apply bg-gradient-to-r from-botanical-600 to-soil-600 bg-clip-text text-transparent;
+  }
+
+  /* Animation delays */
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+  
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+
+  /* Aspect ratios */
+  .aspect-product {
+    aspect-ratio: 3 / 4;
+  }
+
+  .aspect-hero {
+    aspect-ratio: 16 / 9;
+  }
+
+  /* Line clamp utilities extended */
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-4 {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
