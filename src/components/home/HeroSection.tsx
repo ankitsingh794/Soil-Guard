@@ -25,12 +25,14 @@ const HeroSection: React.FC = () => {
               <span>Certified Quality Soil Solutions</span>
             </div>
             
-            <h1 className="text-hero-mobile lg:text-hero-desktop font-display text-soil-800 leading-tight">
-              Soil Guard
-              <span className="block text-gradient mt-2">
+            <div className="space-y-4">
+              <h1 className="text-6xl lg:text-8xl font-display font-bold text-soil-800 leading-none tracking-tight">
+                Soil Guard
+              </h1>
+              <h2 className="text-2xl lg:text-4xl font-display font-semibold text-gradient leading-tight">
                 Smart Soil Solutions for Every Need
-              </span>
-            </h1>
+              </h2>
+            </div>
             
             <p className="text-lg lg:text-xl text-soil-600 leading-relaxed max-w-xl">
               From garden beds to industrial sites, find the perfect soil solution

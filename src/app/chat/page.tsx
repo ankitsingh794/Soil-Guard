@@ -161,10 +161,10 @@ export default function ChatPage() {
       </header>
 
       {/* Main chat area */}
-      <main className="relative z-10 container mx-auto px-4 py-6 max-w-5xl h-[calc(100vh-200px)]">
-        <div className="h-full flex flex-col bg-black/30 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl overflow-hidden">
+      <main className="relative z-10 h-[calc(100vh-88px)]">
+        <div className="h-full flex flex-col bg-black/30 backdrop-blur-xl border-t border-white/10 shadow-2xl overflow-hidden">
           {/* Messages area */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-6">
+          <div className="flex-1 overflow-y-auto px-8 py-8 space-y-6 max-w-6xl mx-auto w-full">
             {messages.map((message) => (
               <div
                 key={message.id}
@@ -229,8 +229,9 @@ export default function ChatPage() {
 
           {/* Quick prompts */}
           {messages.length === 1 && (
-            <div className="px-6 py-4 border-t border-white/10 bg-black/20">
-              <p className="text-sm text-gray-300 mb-3">Quick prompts:</p>
+            <div className="px-8 py-6 border-t border-white/10 bg-black/20">
+              <div className="max-w-6xl mx-auto">
+                <p className="text-sm text-gray-300 mb-3">Quick prompts:</p>
               <div className="flex flex-wrap gap-2">
                 {quickPrompts.map((prompt, index) => (
                   <button
@@ -242,11 +243,13 @@ export default function ChatPage() {
                   </button>
                 ))}
               </div>
+              </div>
             </div>
           )}
 
           {/* Input area */}
-          <div className="p-6 border-t border-white/10 bg-black/20">
+          <div className="px-8 py-6 border-t border-white/10 bg-black/20">
+            <div className="max-w-6xl mx-auto">
             <div className="flex gap-3">
               <div className="flex-1 relative">
                 <input
@@ -274,6 +277,7 @@ export default function ChatPage() {
             <p className="text-xs text-gray-500 mt-3 text-center">
               Press Enter to send • Shift + Enter for new line
             </p>
+            </div>
           </div>
         </div>
       </main>
