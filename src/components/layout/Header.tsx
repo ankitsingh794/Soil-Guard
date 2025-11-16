@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 import { Search, ShoppingCart, Menu, X, User, Phone } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import { useCartStore } from '@/store/cartStore';
-import { useChatStore } from '@/store/chatStore';
 import { cn } from '@/lib/utils';
 
 const Header: React.FC = () => {
@@ -15,7 +14,6 @@ const Header: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const pathname = usePathname();
   const itemCount = useCartStore((state) => state.getItemCount());
-  const openChat = useChatStore((state) => state.openChat);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,15 +58,15 @@ const Header: React.FC = () => {
               🌱 Free shipping on orders over ₹2,000 | Certified Quality Soil Solutions
             </p>
             <div className="flex items-center gap-4 ml-auto">
-              <button
-                onClick={openChat}
+              <Link
+                href="/chat"
                 className="flex items-center gap-1 hover:underline"
                 aria-label="Open chat support"
               >
                 <Phone className="w-4 h-4" />
                 <span className="hidden sm:inline">Need help? Chat with us</span>
                 <span className="sm:hidden">Support</span>
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -110,14 +108,15 @@ const Header: React.FC = () => {
 
           {/* Right side actions */}
           <div className="flex items-center gap-3">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={openChat}
-              className="hidden md:flex"
-            >
-              Get Suggestion
-            </Button>
+            <Link href="/chat">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="hidden md:flex"
+              >
+                Get Suggestion
+              </Button>
+            </Link>
 
             <Link
               href="/profile"
@@ -212,17 +211,15 @@ const Header: React.FC = () => {
               </li>
             ))}
             <li className="pt-2">
-              <Button
-                variant="primary"
-                size="md"
-                onClick={() => {
-                  openChat();
-                  setIsMenuOpen(false);
-                }}
-                className="w-full"
-              >
-                Get Soil Suggestion
-              </Button>
+              <Link href="/chat" onClick={() => setIsMenuOpen(false)}>
+                <Button
+                  variant="primary"
+                  size="md"
+                  className="w-full"
+                >
+                  Get Soil Suggestion
+                </Button>
+              </Link>
             </li>
           </ul>
         </nav>

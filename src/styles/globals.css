@@ -163,6 +163,30 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+
+  /* Floating animation for chat page particles */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) translateX(0);
+      opacity: 0.3;
+    }
+    25% {
+      transform: translateY(-20px) translateX(10px);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translateY(-40px) translateX(-10px);
+      opacity: 0.8;
+    }
+    75% {
+      transform: translateY(-20px) translateX(10px);
+      opacity: 0.6;
+    }
+  }
 }
 
 /* Print styles */

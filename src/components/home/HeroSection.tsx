@@ -5,10 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import Button from '@/components/ui/Button';
-import { useChatStore } from '@/store/chatStore';
 
 const HeroSection: React.FC = () => {
-  const openChat = useChatStore((state) => state.openChat);
 
   return (
     <section className="relative bg-gradient-to-br from-sand-50 via-white to-botanical-50 overflow-hidden">
@@ -41,14 +39,15 @@ const HeroSection: React.FC = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                variant="primary"
-                size="lg"
-                onClick={openChat}
-                rightIcon={<ArrowRight className="w-5 h-5" />}
-              >
-                Find Your Soil Solution
-              </Button>
+              <Link href="/chat">
+                <Button
+                  variant="primary"
+                  size="lg"
+                  rightIcon={<ArrowRight className="w-5 h-5" />}
+                >
+                  Find Your Soil Solution
+                </Button>
+              </Link>
               <Button
                 variant="outline"
                 size="lg"
