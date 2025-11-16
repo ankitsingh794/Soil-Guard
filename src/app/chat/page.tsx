@@ -116,7 +116,7 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+    <div className="h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden flex flex-col">
       {/* Animated background effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse-slow" />
@@ -161,8 +161,8 @@ export default function ChatPage() {
       </header>
 
       {/* Main chat area */}
-      <main className="relative z-10 h-[calc(100vh-88px)]">
-        <div className="h-full flex flex-col bg-black/30 backdrop-blur-xl border-t border-white/10 shadow-2xl overflow-hidden">
+      <main className="relative z-10 flex-1 overflow-hidden">
+        <div className="h-full flex flex-col bg-black/30 backdrop-blur-xl border-t border-white/10 shadow-2xl">
           {/* Messages area */}
           <div className="flex-1 overflow-y-auto px-8 py-8 space-y-6 max-w-6xl mx-auto w-full">
             {messages.map((message) => (
@@ -274,23 +274,21 @@ export default function ChatPage() {
                 )}
               </button>
             </div>
-            <p className="text-xs text-gray-500 mt-3 text-center">
-              Press Enter to send • Shift + Enter for new line
-            </p>
+            <div className="flex items-center justify-between mt-3">
+              <p className="text-xs text-gray-500">
+                Press Enter to send • Shift + Enter for new line
+              </p>
+              <p className="text-xs text-gray-500">
+                AI-powered assistance •{' '}
+                <Link href="/products" className="text-purple-400 hover:text-purple-300 underline">
+                  View products
+                </Link>
+              </p>
+            </div>
             </div>
           </div>
         </div>
       </main>
-
-      {/* Footer info */}
-      <div className="relative z-10 text-center py-4">
-        <p className="text-sm text-gray-400">
-          AI responses are generated for assistance. For accurate product information, please visit our{' '}
-          <Link href="/products" className="text-purple-400 hover:text-purple-300 underline">
-            products page
-          </Link>
-        </p>
-      </div>
     </div>
   );
 }
