@@ -18,6 +18,14 @@ const connectDB = async () => {
     console.log(`✓ MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
     console.error(`✗ MongoDB Connection Error: ${error.message}`);
+    console.error('\n⚠️  TROUBLESHOOTING STEPS:');
+    console.error('1. Go to MongoDB Atlas: https://cloud.mongodb.com/');
+    console.error('2. Select your cluster → Network Access');
+    console.error('3. Click "Add IP Address"');
+    console.error('4. Click "Allow Access from Anywhere" (0.0.0.0/0)');
+    console.error('5. Click "Confirm"');
+    console.error('6. Wait 1-2 minutes for changes to apply');
+    console.error('7. Redeploy your Render service\n');
     process.exit(1);
   }
 };
