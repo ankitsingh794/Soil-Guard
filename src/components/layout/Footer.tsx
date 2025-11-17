@@ -68,7 +68,7 @@ const Footer: React.FC = () => {
           {/* Brand section */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <div className="relative w-12 h-12">
+              <div className="relative w-14 h-14">
                 <Image
                   src={LogoImage}
                   alt="Soil Guard Logo"
@@ -77,14 +77,16 @@ const Footer: React.FC = () => {
                 />
               </div>
               <div>
-                <h2 className="text-xl font-display font-bold">Soil Guard</h2>
-                <p className="text-xs text-soil-300">Smart Soil Solutions</p>
+                <h2 className="text-2xl font-display font-bold text-white">Soil Guard</h2>
+                <p className="text-sm font-semibold text-transparent bg-clip-text bg-gradient-to-r from-botanical-400 to-green-400">
+                  Nature's Ally Farmer's Friend
+                </p>
               </div>
             </div>
-            <p className="text-soil-300 mb-6 leading-relaxed">
-              Your trusted partner for premium soil solutions. From garden beds to
-              industrial sites, we provide certified, sustainable soil products
-              tailored to your needs.
+            <p className="text-soil-300 mb-6 leading-relaxed text-sm">
+              Empowering farmers and nature lovers with premium soil solutions. 
+              From sustainable farming to lush gardens, we're your trusted partner 
+              in nurturing the earth with quality tested, eco-friendly products.
             </p>
             
             {/* Contact info */}
