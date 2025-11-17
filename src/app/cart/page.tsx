@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from '@/components/layout/Layout';
 import { useCartStore } from '@/store/cartStore';
 import { formatPrice } from '@/lib/utils';
@@ -8,8 +8,12 @@ import Button from '@/components/ui/Button';
 import { Trash2, Plus, Minus, ShoppingBag } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useAuth } from '@/contexts/AuthContext';
+import LoginModal from '@/components/LoginModal';
 
 export default function CartPage() {
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const { isAuthenticated } = useAuth();
   const { items, removeItem, updateQuantity, getTotal, clearCart } = useCartStore();
   const total = getTotal();
   const shipping = total > 2000 ? 0 : 150;
@@ -163,7 +167,13 @@ export default function CartPage() {
                   variant="primary"
                   size="lg"
                   className="w-full mb-3"
-                  onClick={() => (window.location.href = '/checkout')}
+                  onClick={() => {
+                    if (!isAuthenticated) {
+                      setShowLoginModal(true);
+                    } else {
+                      window.location.href = '/checkout';
+                    }
+                  }}
                 >
                   Proceed to Checkout
                 </Button>
@@ -192,6 +202,12 @@ export default function CartPage() {
           </div>
         </div>
       </div>
+      
+      <LoginModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        message="Please login to proceed with checkout"
+      />
     </Layout>
   );
 }

@@ -5,9 +5,10 @@ import Layout from '@/components/layout/Layout';
 import ChatBot from '@/components/ChatBot';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
+import ProtectedRoute from '@/components/ProtectedRoute';
 import { User, Mail, Phone, MapPin, Package, Heart, Settings, LogOut, Edit2, Save, X } from 'lucide-react';
 
-export default function ProfilePage() {
+function ProfilePageContent() {
   const [isEditing, setIsEditing] = useState(false);
   const [activeTab, setActiveTab] = useState('profile');
   
@@ -424,5 +425,13 @@ export default function ProfilePage() {
 
       <ChatBot />
     </Layout>
+  );
+}
+
+export default function ProfilePage() {
+  return (
+    <ProtectedRoute>
+      <ProfilePageContent />
+    </ProtectedRoute>
   );
 }

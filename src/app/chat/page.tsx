@@ -4,7 +4,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Send, Sparkles, Loader2, ArrowLeft, Leaf } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import Link from 'next/link';
-import { chat, auth } from '@/lib/api';
+import { chat } from '@/lib/api';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface Message {
   id: string;
@@ -14,6 +15,7 @@ interface Message {
 }
 
 export default function ChatPage() {
+  const { user } = useAuth();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -67,7 +69,6 @@ export default function ChatPage() {
       }
 
       // Get user ID if logged in
-      const user = auth.getUser();
       const userId = user?.id;
 
       // Send message to backend

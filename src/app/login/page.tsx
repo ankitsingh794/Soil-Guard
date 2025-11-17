@@ -3,13 +3,14 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { auth } from '@/lib/api';
+import { useAuth } from '@/contexts/AuthContext';
 import Button from '@/components/ui/Button';
 import Layout from '@/components/layout/Layout';
 import { User, Mail, Lock, Eye, EyeOff } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
+  const { login, register } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -30,32 +31,19 @@ export default function LoginPage() {
 
     try {
       if (isLogin) {
-        // Login
-        const response = await auth.login({
-          email: formData.email,
-          password: formData.password,
-        });
-
-        if (response.success) {
-          setSuccess('Login successful! Redirecting...');
-          setTimeout(() => {
-            router.push('/profile');
-          }, 1000);
-        }
+        // Login using AuthContext
+        await login(formData.email, formData.password);
+        setSuccess('Login successful! Redirecting...');
+        setTimeout(() => {
+          router.push('/profile');
+        }, 1000);
       } else {
-        // Register
-        const response = await auth.register({
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-        });
-
-        if (response.success) {
-          setSuccess('Registration successful! Redirecting...');
-          setTimeout(() => {
-            router.push('/profile');
-          }, 1000);
-        }
+        // Register using AuthContext
+        await register(formData.name, formData.email, formData.password);
+        setSuccess('Registration successful! Redirecting...');
+        setTimeout(() => {
+          router.push('/profile');
+        }, 1000);
       }
     } catch (err: any) {
       setError(err.message || 'An error occurred. Please try again.');

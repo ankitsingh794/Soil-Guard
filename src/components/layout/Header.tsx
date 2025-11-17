@@ -9,23 +9,16 @@ import Button from '@/components/ui/Button';
 import { useCartStore } from '@/store/cartStore';
 import { cn } from '@/lib/utils';
 import LogoImage from '@/components/Logo.jpg';
-import { auth } from '@/lib/api';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState<any>(null);
   const pathname = usePathname();
   const router = useRouter();
   const itemCount = useCartStore((state) => state.getItemCount());
-
-  useEffect(() => {
-    // Check authentication status
-    setIsAuthenticated(auth.isAuthenticated());
-    setUser(auth.getUser());
-  }, [pathname]);
+  const { user, isAuthenticated, logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -156,12 +149,7 @@ const Header: React.FC = () => {
                     My Profile
                   </Link>
                   <button
-                    onClick={() => {
-                      auth.logout();
-                      setIsAuthenticated(false);
-                      setUser(null);
-                      router.push('/');
-                    }}
+                    onClick={logout}
                     className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors flex items-center gap-2"
                   >
                     <LogOut className="w-4 h-4" />
