@@ -145,8 +145,8 @@ const HeroSection: React.FC = () => {
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-2xl font-bold text-botanical-600">₹899</p>
-                    <p className="text-sm text-soil-500 line-through">₹1,199</p>
+                    <p className="text-2xl font-bold text-botanical-600">₹699</p>
+                    <p className="text-sm text-soil-500 line-through">₹899</p>
                   </div>
                 </div>
               </div>

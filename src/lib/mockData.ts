@@ -8,8 +8,8 @@ export const mockProducts: Product[] = [
     slug: 'premium-garden-soil-mix',
     description: 'Our premium garden soil mix is specially formulated to provide optimal growing conditions for vegetables, flowers, and herbs. Rich in organic matter and essential nutrients, this soil promotes healthy root development and vigorous plant growth.',
     shortDescription: 'Perfect blend for vegetable and flower gardens',
-    price: 899,
-    originalPrice: 1199,
+    price: 699,
+    originalPrice: 899,
     images: [
       'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800',
       'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800',
@@ -43,7 +43,7 @@ export const mockProducts: Product[] = [
     slug: 'indoor-plant-potting-mix',
     description: 'Specially designed for indoor plants, this lightweight potting mix ensures excellent drainage while retaining optimal moisture levels. Perfect for houseplants, succulents, and tropical plants.',
     shortDescription: 'Ideal for all indoor houseplants',
-    price: 599,
+    price: 449,
     images: [
       'https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=800',
     ],
@@ -106,8 +106,8 @@ export const mockProducts: Product[] = [
     slug: 'organic-lawn-fertilizer-soil',
     description: 'Transform your lawn with our nutrient-rich organic soil blend. Designed to promote lush, green grass growth while improving soil structure and water retention.',
     shortDescription: 'For vibrant, healthy lawns',
-    price: 1299,
-    originalPrice: 1599,
+    price: 799,
+    originalPrice: 999,
     images: [
       'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',
     ],
@@ -139,7 +139,7 @@ export const mockProducts: Product[] = [
     slug: 'cactus-succulent-mix',
     description: 'Specially formulated for cacti and succulents, this fast-draining soil mix prevents water-logging and root rot while providing essential nutrients.',
     shortDescription: 'Perfect for cacti and succulents',
-    price: 449,
+    price: 349,
     images: [
       'https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=800',
     ],
@@ -171,7 +171,7 @@ export const mockProducts: Product[] = [
     slug: 'raised-bed-garden-soil',
     description: 'Complete soil solution for raised bed gardens. This premium mix combines the perfect balance of drainage, aeration, and nutrient retention for productive vegetable gardening.',
     shortDescription: 'Optimized for raised bed gardening',
-    price: 1499,
+    price: 899,
     images: [
       'https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=800',
     ],
@@ -203,7 +203,7 @@ export const mockProducts: Product[] = [
     slug: 'organic-compost-premium',
     description: 'Rich, mature compost that enhances soil fertility naturally. Perfect for amending garden beds, enriching potting mixes, and top-dressing lawns.',
     shortDescription: 'Nutrient-rich organic compost',
-    price: 799,
+    price: 599,
     images: [
       'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800',
     ],
@@ -235,7 +235,7 @@ export const mockProducts: Product[] = [
     slug: 'seed-starting-mix',
     description: 'Sterile, fine-textured growing medium perfect for starting seeds. Provides ideal moisture retention and aeration for germination and early seedling growth.',
     shortDescription: 'Perfect for seed germination',
-    price: 549,
+    price: 399,
     images: [
       'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=800',
     ],
@@ -266,7 +266,7 @@ export const mockProducts: Product[] = [
     slug: 'orchid-potting-mix',
     description: 'Specialized blend for orchids featuring bark, charcoal, and perlite. Provides excellent drainage and air circulation required for healthy orchid roots.',
     shortDescription: 'Specially formulated for orchids',
-    price: 649,
+    price: 499,
     images: [
       'https://images.unsplash.com/photo-1551893478-c4142e6b0b10?w=800',
     ],
@@ -298,8 +298,8 @@ export const mockProducts: Product[] = [
     slug: 'vegetable-garden-soil',
     description: 'Nutrient-dense soil blend specifically formulated for growing vegetables. Rich in organic matter with balanced nutrients for maximum yield.',
     shortDescription: 'Optimized for vegetable growth',
-    price: 1099,
-    originalPrice: 1399,
+    price: 749,
+    originalPrice: 949,
     images: [
       'https://images.unsplash.com/photo-1592419044706-39796d40f98c?w=800',
     ],
@@ -331,7 +331,7 @@ export const mockProducts: Product[] = [
     slug: 'bonsai-tree-soil-mix',
     description: 'Premium bonsai soil with perfect drainage and aeration. Contains akadama, pumice, and lava rock for traditional bonsai cultivation.',
     shortDescription: 'Professional bonsai growing medium',
-    price: 899,
+    price: 699,
     images: [
       'https://images.unsplash.com/photo-1525923838299-2312b60f6d69?w=800',
     ],
@@ -363,7 +363,7 @@ export const mockProducts: Product[] = [
     slug: 'rose-garden-soil',
     description: 'Specially formulated for roses with optimal pH and nutrients. Promotes vibrant blooms and healthy growth for all rose varieties.',
     shortDescription: 'Perfect for beautiful roses',
-    price: 949,
+    price: 649,
     images: [
       'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800',
     ],
@@ -394,7 +394,7 @@ export const mockProducts: Product[] = [
     slug: 'container-garden-mix',
     description: 'Lightweight potting soil perfect for container gardening on patios, balconies, and terraces. Excellent drainage and nutrient retention.',
     shortDescription: 'Ideal for pots and containers',
-    price: 699,
+    price: 549,
     images: [
       'https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800',
     ],
@@ -425,7 +425,7 @@ export const mockProducts: Product[] = [
     slug: 'topsoil-premium-grade',
     description: 'High-quality topsoil for landscaping, lawn repair, and garden bed preparation. Screened and enriched with organic matter.',
     shortDescription: 'Premium topsoil for landscaping',
-    price: 1199,
+    price: 849,
     images: [
       'https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?w=800',
     ],
@@ -456,7 +456,7 @@ export const mockProducts: Product[] = [
     slug: 'herb-garden-mix',
     description: 'Specially blended for growing culinary and medicinal herbs. Excellent drainage with balanced nutrients for flavorful harvests.',
     shortDescription: 'Perfect for kitchen herbs',
-    price: 579,
+    price: 429,
     images: [
       'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=800',
     ],
