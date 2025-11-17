@@ -110,7 +110,7 @@ export default function TermsPage() {
       title: 'Governing Law',
       content: [
         'These terms are governed by the laws of India.',
-        'Any disputes shall be subject to the exclusive jurisdiction of courts in Bangalore, Karnataka.',
+        'Any disputes shall be subject to the exclusive jurisdiction of courts in Kolkata, West Bengal.',
         'If any provision is found unenforceable, the remaining provisions remain in effect.',
       ],
     },
@@ -128,7 +128,7 @@ export default function TermsPage() {
         'For questions about these Terms of Service, contact us:',
         'Email: legal@soilguard.com',
         'Phone: +91 123 456 7890',
-        'Address: 123 Green Lane, Eco District, Bangalore, Karnataka 560001',
+        'Address: Sector II, Kolkata, West Bengal, India',
       ],
     },
   ];

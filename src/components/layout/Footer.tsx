@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
     { icon: '🔒', label: 'Secure Checkout' },
     { icon: '✓', label: 'Certified Quality' },
     { icon: '🚚', label: 'Free Shipping' },
-    { icon: '⭐', label: '1000+ Reviews' },
+    { icon: '⭐', label: '1000+ Reviews*' },
   ];
 
   return (
@@ -94,8 +94,8 @@ const Footer: React.FC = () => {
               <div className="flex items-start gap-3 text-sm">
                 <MapPin className="w-5 h-5 text-botanical-400 flex-shrink-0 mt-0.5" />
                 <span className="text-soil-300">
-                  123 Green Lane, Eco District<br />
-                  Bangalore, Karnataka 560001
+                  Sector II, Kolkata<br />
+                  West Bengal, India
                 </span>
               </div>
               <div className="flex items-center gap-3 text-sm">
@@ -246,6 +246,13 @@ const Footer: React.FC = () => {
             </p>
             <p className="flex items-center gap-1">
               Made with <span className="text-botanical-400">♥</span> for a greener tomorrow
+            </p>
+          </div>
+          
+          {/* Development disclaimer */}
+          <div className="mt-4 pt-4 border-t border-soil-700/50 text-center">
+            <p className="text-xs text-soil-500 italic">
+              * Site in development phase. All customer statistics, reviews, and testimonials are generic placeholder content for demonstration purposes.
             </p>
           </div>
         </div>

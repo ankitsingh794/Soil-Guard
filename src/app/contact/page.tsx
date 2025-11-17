@@ -72,7 +72,7 @@ export default function ContactPage() {
     {
       icon: <MapPin className="w-6 h-6" />,
       title: 'Visit Us',
-      details: ['123 Green Lane, Eco District', 'Bangalore, Karnataka 560001', 'India'],
+      details: ['Sector II, Kolkata', 'West Bengal, India'],
     },
     {
       icon: <Phone className="w-6 h-6" />,

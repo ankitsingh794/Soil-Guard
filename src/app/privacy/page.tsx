@@ -96,7 +96,7 @@ export default function PrivacyPage() {
         'If you have questions about this Privacy Policy, please contact us:',
         'Email: privacy@soilguard.com',
         'Phone: +91 123 456 7890',
-        'Address: 123 Green Lane, Eco District, Bangalore, Karnataka 560001',
+        'Address: Sector II, Kolkata, West Bengal, India',
       ],
     },
   ];
