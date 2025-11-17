@@ -2,11 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Search, ShoppingCart, Menu, X, User, Phone } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import { useCartStore } from '@/store/cartStore';
 import { cn } from '@/lib/utils';
+import LogoImage from '@/components/Logo.jpg';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -76,9 +78,15 @@ const Header: React.FC = () => {
       <div className="container-custom py-4">
         <div className="flex items-center justify-between gap-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 flex-shrink-0">
-            <div className="w-10 h-10 bg-botanical-500 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">SG</span>
+          <Link href="/" className="flex items-center gap-3 flex-shrink-0">
+            <div className="relative w-12 h-12 sm:w-14 sm:h-14">
+              <Image
+                src={LogoImage}
+                alt="Soil Guard Logo"
+                fill
+                className="object-contain"
+                priority
+              />
             </div>
             <div className="hidden sm:block">
               <h1 className="text-xl font-display font-bold text-soil-700">

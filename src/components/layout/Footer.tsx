@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Github, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import LogoImage from '@/components/Logo.jpg';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -65,9 +67,14 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Brand section */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-botanical-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">SG</span>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="relative w-12 h-12">
+                <Image
+                  src={LogoImage}
+                  alt="Soil Guard Logo"
+                  fill
+                  className="object-contain"
+                />
               </div>
               <div>
                 <h2 className="text-xl font-display font-bold">Soil Guard</h2>
