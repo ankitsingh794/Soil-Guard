@@ -65,7 +65,7 @@ router.post('/', optionalAuth, async (req, res) => {
       const response = await axios.post(
         `${process.env.OPENROUTER_BASE_URL}/chat/completions`,
         {
-          model: 'meta-llama/llama-3.1-8b-instruct:free', // Free model
+          model: 'meta-llama/llama-4-maverick', // Llama 4 Maverick model
           messages: messages,
           temperature: 0.7,
           max_tokens: 500
