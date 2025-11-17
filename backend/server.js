@@ -10,6 +10,23 @@ const chatRoutes = require('./routes/chat');
 // Initialize express
 const app = express();
 
+// Check required environment variables
+console.log('Checking environment variables...');
+const requiredEnvVars = ['MONGODB_URI', 'JWT_SECRET', 'OPENROUTER_API_KEY'];
+const missingEnvVars = requiredEnvVars.filter(varName => !process.env[varName]);
+
+if (missingEnvVars.length > 0) {
+  console.error('ERROR: Missing required environment variables:');
+  missingEnvVars.forEach(varName => {
+    console.error(`  - ${varName}`);
+  });
+  console.log('\nPlease set these in your Render dashboard under Environment tab');
+  console.log('See backend/.env.example for reference');
+  process.exit(1);
+}
+
+console.log('✓ All required environment variables are set');
+
 // Connect to MongoDB
 connectDB();
 
