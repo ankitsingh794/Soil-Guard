@@ -1,0 +1,247 @@
+================================================================================
+                        SOIL GUARD - TECH STACK
+================================================================================
+
+PROJECT: Soil Guard - Nature's Ally Farmer's Friend
+TYPE: Full-Stack E-commerce & AI-Powered Recommendation Platform
+TAGLINE: Premium soil solutions for farmers and nature lovers
+
+================================================================================
+                            FRONTEND
+================================================================================
+
+Framework:          Next.js 14 (App Router)
+Language:           TypeScript 5.3
+UI Library:         React 18
+Styling:            Tailwind CSS 3.4
+State Management:   - Zustand (Cart Management)
+                    - React Context API (Authentication)
+Icons:              Lucide React
+Image Optimization: Next.js Image Component
+Fonts:              Next.js Font Optimization
+
+Key Features:
+- Server-side rendering (SSR)
+- Static site generation (SSG)
+- Dynamic routing
+- Image optimization
+- SEO optimization
+- Responsive design
+
+================================================================================
+                            BACKEND
+================================================================================
+
+Runtime:            Node.js 22.16.0
+Framework:          Express.js 4.18.2
+Language:           JavaScript
+Database:           MongoDB Atlas (Cloud)
+ODM:                Mongoose 8.0.3
+Authentication:     JWT (JSON Web Tokens)
+Password Hashing:   bcryptjs 2.4.3
+Validation:         express-validator
+CORS:               cors package
+
+API Endpoints:
+- /api/auth/register - User registration
+- /api/auth/login - User authentication
+- /api/auth/me - Get current user
+- /api/auth/profile - Update user profile
+- /api/chat - AI chat interactions
+- /api/chat/history - Chat history
+- /api/health - Health check
+
+================================================================================
+                          AI INTEGRATION
+================================================================================
+
+AI Provider:        OpenRouter API
+Model:              Meta Llama 4 Maverick
+Features:           - Product recommendations
+                    - Soil advice
+                    - Customer support
+                    - Context-aware responses
+                    - Session-based conversations
+
+================================================================================
+                          DATABASE
+================================================================================
+
+Type:               NoSQL (Document-based)
+Service:            MongoDB Atlas (Cloud Hosted)
+Cluster:            cluster0.7gbokln.mongodb.net
+Database Name:      soilguard
+Collections:        - users (User accounts)
+                    - chats (Chat sessions with 30-day TTL)
+
+================================================================================
+                        AUTHENTICATION
+================================================================================
+
+Method:             JWT Token-based
+Token Storage:      localStorage (client-side)
+Token Expiry:       30 days
+Password Security:  bcrypt hashing (10 salt rounds)
+Session:            Persistent across browser restarts
+
+Protected Routes:   - /profile (User profile)
+                    - Checkout process (requires login)
+
+================================================================================
+                          DEPLOYMENT
+================================================================================
+
+FRONTEND DEPLOYMENT:
+Platform:           Vercel
+URL:                https://soil-guard-livid.vercel.app
+Build Command:      npm run build
+Auto-Deploy:        Git push to master branch
+Environment:        Production
+CDN:                Global edge network
+SSL:                Automatic HTTPS
+
+BACKEND DEPLOYMENT:
+Platform:           Render (Free Tier)
+URL:                https://soil-guard.onrender.com
+Port:               10000
+Build Command:      npm install
+Start Command:      npm start
+Environment:        production
+Region:             Auto-selected
+Health Check:       /api/health
+
+Environment Variables (Render):
+- MONGODB_URI       : MongoDB Atlas connection string
+- JWT_SECRET        : Secret key for JWT signing
+- OPENROUTER_API_KEY: API key for AI integration
+- FRONTEND_URL      : https://soil-guard-livid.vercel.app
+- NODE_ENV          : production
+- PORT              : 10000
+
+================================================================================
+                      DEVELOPMENT TOOLS
+================================================================================
+
+Package Manager:    npm
+Version Control:    Git + GitHub (ankitsingh794/Soil-Guard)
+Code Editor:        VS Code
+Linting:            ESLint
+TypeScript Config:  tsconfig.json
+PostCSS:            postcss.config.js
+Tailwind Config:    tailwind.config.ts
+
+Scripts:
+- npm run dev       : Development server (localhost:3000)
+- npm run build     : Production build
+- npm start         : Start production server
+- npm run lint      : Run ESLint
+
+================================================================================
+                        KEY FEATURES
+================================================================================
+
+✅ User Authentication (Register, Login, Logout)
+✅ Protected Routes with automatic redirects
+✅ AI-Powered Chat Assistant
+✅ Product Catalog (15+ products)
+✅ Shopping Cart (Zustand state management)
+✅ Responsive Design (Mobile, Tablet, Desktop)
+✅ SEO Optimized (Metadata, OpenGraph)
+✅ Image Optimization (Next.js Image)
+✅ Session Persistence (localStorage)
+✅ Real-time Chat with AI
+✅ Product Search & Filtering
+✅ Category-based Navigation
+✅ Secure Checkout Flow
+✅ Modern UI/UX (Glassmorphism, Gradients, Animations)
+
+================================================================================
+                      SECURITY FEATURES
+================================================================================
+
+🔒 HTTPS/SSL encryption (Vercel + Render)
+🔒 JWT token authentication
+🔒 Password hashing (bcrypt)
+🔒 CORS configuration
+🔒 Environment variable protection
+🔒 Input validation (express-validator)
+🔒 MongoDB Atlas network security
+🔒 Secure API endpoints
+
+================================================================================
+                        PERFORMANCE
+================================================================================
+
+Frontend:
+- Server-side rendering for faster initial load
+- Image optimization and lazy loading
+- Code splitting and tree shaking
+- Static asset caching
+- Vercel Edge CDN
+
+Backend:
+- MongoDB connection pooling
+- Efficient query optimization
+- API response caching
+- Session-based chat history
+
+================================================================================
+                      THIRD-PARTY SERVICES
+================================================================================
+
+1. Vercel              - Frontend hosting & CDN
+2. Render              - Backend hosting
+3. MongoDB Atlas       - Database hosting
+4. OpenRouter          - AI model API
+5. Unsplash            - Stock images
+6. GitHub              - Version control & CI/CD
+
+================================================================================
+                        BROWSER SUPPORT
+================================================================================
+
+✅ Chrome (latest)
+✅ Firefox (latest)
+✅ Safari (latest)
+✅ Edge (latest)
+✅ Mobile browsers (iOS Safari, Chrome Mobile)
+
+================================================================================
+                      PROJECT STRUCTURE
+================================================================================
+
+SoilGuard/
+├── src/
+│   ├── app/              # Next.js app routes
+│   ├── components/       # React components
+│   ├── contexts/         # React Context (Auth)
+│   ├── lib/              # Utilities & API client
+│   ├── store/            # Zustand stores
+│   ├── styles/           # Global CSS & Tailwind
+│   └── types/            # TypeScript types
+├── backend/
+│   ├── config/           # Database config
+│   ├── models/           # Mongoose models
+│   ├── routes/           # API routes
+│   └── server.js         # Express server
+├── public/               # Static assets
+└── package.json          # Dependencies
+
+================================================================================
+                        CONTACT & LINKS
+================================================================================
+
+Live Site:       https://soil-guard-livid.vercel.app
+Backend API:     https://soil-guard.onrender.com
+GitHub:          https://github.com/ankitsingh794/Soil-Guard
+LinkedIn:        https://www.linkedin.com/in/soil-guard-166878386
+
+================================================================================
+                    VERSION & LAST UPDATED
+================================================================================
+
+Version:         1.0.0
+Last Updated:    November 17, 2025
+Status:          Production Ready ✅
+
+================================================================================
