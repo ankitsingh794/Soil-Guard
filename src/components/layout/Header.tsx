@@ -3,19 +3,29 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { Search, ShoppingCart, Menu, X, User, Phone } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { Search, ShoppingCart, Menu, X, User, Phone, LogOut } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import { useCartStore } from '@/store/cartStore';
 import { cn } from '@/lib/utils';
 import LogoImage from '@/components/Logo.jpg';
+import { auth } from '@/lib/api';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState<any>(null);
   const pathname = usePathname();
+  const router = useRouter();
   const itemCount = useCartStore((state) => state.getItemCount());
+
+  useEffect(() => {
+    // Check authentication status
+    setIsAuthenticated(auth.isAuthenticated());
+    setUser(auth.getUser());
+  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -126,13 +136,48 @@ const Header: React.FC = () => {
               </Button>
             </Link>
 
-            <Link
-              href="/profile"
-              className="p-2 hover:bg-sand-100 rounded-lg transition-colors"
-              aria-label="My account"
-            >
-              <User className="w-6 h-6 text-soil-600" />
-            </Link>
+            {isAuthenticated ? (
+              <div className="relative group">
+                <button
+                  className="p-2 hover:bg-sand-100 rounded-lg transition-colors"
+                  aria-label="My account"
+                >
+                  <User className="w-6 h-6 text-soil-600" />
+                </button>
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-sand-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  <div className="p-3 border-b border-sand-200">
+                    <p className="text-sm font-semibold text-soil-800">{user?.name || 'User'}</p>
+                    <p className="text-xs text-soil-500 truncate">{user?.email}</p>
+                  </div>
+                  <Link
+                    href="/profile"
+                    className="block px-4 py-2 text-sm text-soil-700 hover:bg-sand-50 transition-colors"
+                  >
+                    My Profile
+                  </Link>
+                  <button
+                    onClick={() => {
+                      auth.logout();
+                      setIsAuthenticated(false);
+                      setUser(null);
+                      router.push('/');
+                    }}
+                    className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors flex items-center gap-2"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Logout
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                className="p-2 hover:bg-sand-100 rounded-lg transition-colors"
+                aria-label="Login"
+              >
+                <User className="w-6 h-6 text-soil-600" />
+              </Link>
+            )}
 
             <Link
               href="/cart"

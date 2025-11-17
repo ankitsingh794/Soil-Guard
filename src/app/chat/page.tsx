@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Send, Sparkles, Loader2, ArrowLeft, Leaf } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import Link from 'next/link';
+import { chat, auth } from '@/lib/api';
 
 interface Message {
   id: string;
@@ -53,12 +54,42 @@ export default function ChatPage() {
     };
 
     setMessages((prev) => [...prev, userMessage]);
+    const messageText = inputValue;
     setInputValue('');
     setIsLoading(true);
 
-    // Simulate AI response
-    setTimeout(() => {
-      const botResponse = generateResponse(inputValue);
+    try {
+      // Get session ID from localStorage or create new one
+      let sessionId = localStorage.getItem('soilguard_chat_session');
+      if (!sessionId) {
+        sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+        localStorage.setItem('soilguard_chat_session', sessionId);
+      }
+
+      // Get user ID if logged in
+      const user = auth.getUser();
+      const userId = user?.id;
+
+      // Send message to backend
+      const response = await chat.sendMessage({
+        message: messageText,
+        sessionId,
+        userId,
+      });
+
+      const botMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: response.response || response.message || 'Sorry, I could not process that.',
+        sender: 'bot',
+        timestamp: new Date(),
+      };
+      
+      setMessages((prev) => [...prev, botMessage]);
+    } catch (error) {
+      console.error('Chat error:', error);
+      
+      // Fallback to local response if API fails
+      const botResponse = generateResponse(messageText);
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
         text: botResponse,
@@ -66,8 +97,9 @@ export default function ChatPage() {
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, botMessage]);
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
   };
 
   const handleQuickPrompt = (prompt: string) => {
