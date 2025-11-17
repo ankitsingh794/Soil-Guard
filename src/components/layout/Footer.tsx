@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { Github, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -106,25 +106,16 @@ const Footer: React.FC = () => {
             {/* Social links */}
             <div className="flex items-center gap-4 mt-6">
               <a
-                href="https://facebook.com"
+                href="https://www.linkedin.com/in/soil-guard-166878386?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg bg-soil-700 hover:bg-botanical-500 flex items-center justify-center transition-colors"
-                aria-label="Facebook"
+                aria-label="LinkedIn"
               >
-                <Facebook className="w-5 h-5" />
+                <Linkedin className="w-5 h-5" />
               </a>
               <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-soil-700 hover:bg-botanical-500 flex items-center justify-center transition-colors"
-                aria-label="Twitter"
-              >
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/soil_guard?igsh=d3M3d2psejRodDA="
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg bg-soil-700 hover:bg-botanical-500 flex items-center justify-center transition-colors"
@@ -133,13 +124,14 @@ const Footer: React.FC = () => {
                 <Instagram className="w-5 h-5" />
               </a>
               <a
-                href="https://linkedin.com"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg bg-soil-700 hover:bg-botanical-500 flex items-center justify-center transition-colors"
-                aria-label="LinkedIn"
+                aria-label="GitHub"
+                title="GitHub link coming soon"
               >
-                <Linkedin className="w-5 h-5" />
+                <Github className="w-5 h-5" />
               </a>
             </div>
           </div>
