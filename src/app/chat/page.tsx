@@ -16,17 +16,12 @@ interface Message {
 
 export default function ChatPage() {
   const { user } = useAuth();
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: '1',
-      text: "Hello! I'm your Soil Guard AI assistant. I can help you find the perfect soil for your needs. What type of project are you working on?",
-      sender: 'bot',
-      timestamp: new Date(),
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingHistory, setIsLoadingHistory] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [sessionId, setSessionId] = useState<string>('');
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -35,6 +30,71 @@ export default function ChatPage() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Load chat history on mount
+  useEffect(() => {
+    const loadChatHistory = async () => {
+      try {
+        // Get or create session ID based on user
+        let sid = localStorage.getItem('soilguard_chat_session');
+        
+        // If user is logged in, create user-specific session ID
+        if (user) {
+          sid = `user_${user.id}_session`;
+          localStorage.setItem('soilguard_chat_session', sid);
+        } else if (!sid) {
+          // Create anonymous session
+          sid = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+          localStorage.setItem('soilguard_chat_session', sid);
+        }
+        
+        setSessionId(sid);
+
+        // Try to load existing chat history
+        try {
+          const history = await chat.getHistory(sid);
+          if (history.messages && history.messages.length > 0) {
+            const loadedMessages: Message[] = history.messages.map((msg: any, index: number) => ({
+              id: `${index}_${Date.now()}`,
+              text: msg.content,
+              sender: msg.role === 'user' ? 'user' : 'bot',
+              timestamp: new Date(msg.timestamp || Date.now()),
+            }));
+            setMessages(loadedMessages);
+          } else {
+            // No history, show welcome message
+            setMessages([{
+              id: '1',
+              text: "Hello! I'm your Soil Guard AI assistant. I can help you find the perfect soil for your needs. What type of project are you working on?",
+              sender: 'bot',
+              timestamp: new Date(),
+            }]);
+          }
+        } catch (historyError) {
+          // No history found, show welcome message
+          setMessages([{
+            id: '1',
+            text: "Hello! I'm your Soil Guard AI assistant. I can help you find the perfect soil for your needs. What type of project are you working on?",
+            sender: 'bot',
+            timestamp: new Date(),
+          }]);
+        }
+      } catch (error) {
+        console.error('Error loading chat history:', error);
+        // Show welcome message on error
+        setMessages([{
+          id: '1',
+          text: "Hello! I'm your Soil Guard AI assistant. I can help you find the perfect soil for your needs. What type of project are you working on?",
+          sender: 'bot',
+          timestamp: new Date(),
+        }]);
+      } finally {
+        setIsLoadingHistory(false);
+      }
+    };
+
+    loadChatHistory();
+  }, [user]);
 
   const quickPrompts = [
     'I need soil for my garden',
@@ -46,7 +106,7 @@ export default function ChatPage() {
   ];
 
   const handleSend = async () => {
-    if (!inputValue.trim()) return;
+    if (!inputValue.trim() || !sessionId) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -61,21 +121,11 @@ export default function ChatPage() {
     setIsLoading(true);
 
     try {
-      // Get session ID from localStorage or create new one
-      let sessionId = localStorage.getItem('soilguard_chat_session');
-      if (!sessionId) {
-        sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-        localStorage.setItem('soilguard_chat_session', sessionId);
-      }
-
-      // Get user ID if logged in
-      const userId = user?.id;
-
-      // Send message to backend
+      // Send message to backend with user ID if logged in
       const response = await chat.sendMessage({
         message: messageText,
-        sessionId,
-        userId,
+        sessionId: sessionId,
+        userId: user?.id,
       });
 
       const botMessage: Message = {
@@ -198,11 +248,19 @@ export default function ChatPage() {
         <div className="h-full flex flex-col bg-black/30 backdrop-blur-xl border-t border-white/10 shadow-2xl">
           {/* Messages area */}
           <div className="flex-1 overflow-y-auto px-8 py-8 space-y-6 max-w-6xl mx-auto w-full">
-            {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`flex gap-4 ${message.sender === 'user' ? 'flex-row-reverse' : ''}`}
-              >
+            {isLoadingHistory ? (
+              <div className="flex items-center justify-center h-full">
+                <div className="text-center space-y-4">
+                  <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-purple-500/30 border-t-purple-500"></div>
+                  <p className="text-white/70 text-sm">Loading your chat history...</p>
+                </div>
+              </div>
+            ) : (
+              messages.map((message) => (
+                <div
+                  key={message.id}
+                  className={`flex gap-4 ${message.sender === 'user' ? 'flex-row-reverse' : ''}`}
+                >
                 {/* Avatar */}
                 <div
                   className={`flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center ${
@@ -241,7 +299,8 @@ export default function ChatPage() {
                   </p>
                 </div>
               </div>
-            ))}
+              ))
+            )}
 
             {isLoading && (
               <div className="flex gap-4">
