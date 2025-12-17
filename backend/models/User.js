@@ -27,6 +27,23 @@ const userSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
+  // Notification channels
+  whatsappNumber: {
+    type: String,
+    trim: true
+  },
+  smsNumber: {
+    type: String,
+    trim: true
+  },
+  notificationPreferences: {
+    email: { type: Boolean, default: true },
+    sms: { type: Boolean, default: false },
+    whatsapp: { type: Boolean, default: false },
+    orderUpdates: { type: Boolean, default: true },
+    soilReports: { type: Boolean, default: true },
+    recommendations: { type: Boolean, default: true }
+  },
   address: {
     line1: String,
     line2: String,
@@ -34,10 +51,36 @@ const userSchema = new mongoose.Schema({
     state: String,
     postalCode: String
   },
+  // User type and role
+  userType: {
+    type: String,
+    enum: ['customer', 'farmer'],
+    default: 'customer'
+  },
   role: {
     type: String,
     enum: ['user', 'admin'],
     default: 'user'
+  },
+  // Farmer-specific details
+  farmDetails: {
+    farmName: String,
+    farmSize: Number, // in acres
+    farmSizeUnit: { type: String, enum: ['acres', 'hectares'], default: 'acres' },
+    location: {
+      village: String,
+      district: String,
+      state: String,
+      pincode: String,
+      coordinates: {
+        latitude: Number,
+        longitude: Number
+      }
+    },
+    cropTypes: [String], // e.g., ['wheat', 'rice', 'vegetables']
+    soilType: String, // e.g., 'clay', 'loam', 'sandy'
+    irrigationType: String, // e.g., 'drip', 'sprinkler', 'flood'
+    farmingMethod: String // e.g., 'organic', 'conventional', 'mixed'
   },
   createdAt: {
     type: Date,

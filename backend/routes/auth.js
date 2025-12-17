@@ -13,7 +13,7 @@ const generateToken = (id) => {
 };
 
 // @route   POST /api/auth/register
-// @desc    Register a new user
+// @desc    Register a new user or farmer
 // @access  Public
 router.post('/register', [
   body('name').trim().isLength({ min: 2 }).withMessage('Name must be at least 2 characters'),
@@ -30,7 +30,17 @@ router.post('/register', [
       });
     }
 
-    const { name, email, password, phone } = req.body;
+    const { 
+      name, 
+      email, 
+      password, 
+      phone,
+      userType,
+      whatsappNumber,
+      smsNumber,
+      notificationPreferences,
+      farmDetails
+    } = req.body;
 
     // Check if user already exists
     const existingUser = await User.findOne({ email });
@@ -41,27 +51,54 @@ router.post('/register', [
       });
     }
 
-    // Create user
-    const user = await User.create({
+    // Create user data object
+    const userData = {
       name,
       email,
       password,
-      phone
-    });
+      phone,
+      userType: userType || 'customer'
+    };
+
+    // Add farmer-specific data if userType is farmer
+    if (userType === 'farmer') {
+      if (whatsappNumber) userData.whatsappNumber = whatsappNumber;
+      if (smsNumber) userData.smsNumber = smsNumber;
+      if (notificationPreferences) userData.notificationPreferences = notificationPreferences;
+      if (farmDetails) userData.farmDetails = farmDetails;
+    }
+
+    // Create user
+    const user = await User.create(userData);
 
     // Generate token
     const token = generateToken(user._id);
 
+    // Send welcome notification for farmers
+    if (userType === 'farmer') {
+      const notificationService = require('../services/notificationService');
+      try {
+        await notificationService.sendNotification(user, 'welcomeFarmer', user.name);
+      } catch (notifError) {
+        console.error('Welcome notification error:', notifError);
+        // Don't fail registration if notification fails
+      }
+    }
+
     res.status(201).json({
       success: true,
-      message: 'User registered successfully',
+      message: userType === 'farmer' ? 'Farmer account created successfully' : 'User registered successfully',
       token,
       user: {
         id: user._id,
         name: user.name,
         email: user.email,
         phone: user.phone,
-        role: user.role
+        userType: user.userType,
+        role: user.role,
+        whatsappNumber: user.whatsappNumber,
+        smsNumber: user.smsNumber,
+        farmDetails: user.farmDetails
       }
     });
   } catch (error) {
