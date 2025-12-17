@@ -10,15 +10,13 @@ import { User, Mail, Lock, Eye, EyeOff } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login, register } = useAuth();
-  const [isLogin, setIsLogin] = useState(true);
+  const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
     password: '',
   });
@@ -30,21 +28,11 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      if (isLogin) {
-        // Login using AuthContext
-        await login(formData.email, formData.password);
-        setSuccess('Login successful! Redirecting...');
-        setTimeout(() => {
-          router.push('/profile');
-        }, 1000);
-      } else {
-        // Register using AuthContext
-        await register(formData.name, formData.email, formData.password);
-        setSuccess('Registration successful! Redirecting...');
-        setTimeout(() => {
-          router.push('/profile');
-        }, 1000);
-      }
+      await login(formData.email, formData.password);
+      setSuccess('Login successful! Redirecting...');
+      setTimeout(() => {
+        router.push('/dashboard');
+      }, 1000);
     } catch (err: any) {
       setError(err.message || 'An error occurred. Please try again.');
     } finally {
@@ -70,48 +58,15 @@ export default function LoginPage() {
                 <User className="w-8 h-8 text-white" />
               </div>
               <h1 className="text-3xl font-bold text-soil-800 mb-2">
-                {isLogin ? 'Welcome Back' : 'Create Account'}
+                Welcome Back
               </h1>
               <p className="text-soil-600">
-                {isLogin
-                  ? 'Sign in to access your account'
-                  : 'Join SoilGuard to get started'}
+                Sign in to access your farmer dashboard
               </p>
             </div>
 
             {/* Form Card */}
             <div className="bg-white rounded-2xl shadow-lg p-8 border border-sand-200">
-              {/* Tabs */}
-              <div className="flex gap-2 mb-6 bg-sand-100 p-1 rounded-lg">
-                <button
-                  onClick={() => {
-                    setIsLogin(true);
-                    setError('');
-                    setSuccess('');
-                  }}
-                  className={`flex-1 py-2 px-4 rounded-md font-medium transition-colors ${
-                    isLogin
-                      ? 'bg-white text-botanical-600 shadow-sm'
-                      : 'text-soil-600 hover:text-soil-800'
-                  }`}
-                >
-                  Login
-                </button>
-                <button
-                  onClick={() => {
-                    setIsLogin(false);
-                    setError('');
-                    setSuccess('');
-                  }}
-                  className={`flex-1 py-2 px-4 rounded-md font-medium transition-colors ${
-                    !isLogin
-                      ? 'bg-white text-botanical-600 shadow-sm'
-                      : 'text-soil-600 hover:text-soil-800'
-                  }`}
-                >
-                  Register
-                </button>
-              </div>
 
               {/* Error/Success Messages */}
               {error && (
@@ -127,27 +82,6 @@ export default function LoginPage() {
 
               {/* Form */}
               <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Name Field (Register Only) */}
-                {!isLogin && (
-                  <div>
-                    <label className="block text-sm font-medium text-soil-700 mb-2">
-                      Full Name
-                    </label>
-                    <div className="relative">
-                      <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-soil-400 w-5 h-5" />
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required={!isLogin}
-                        className="w-full pl-10 pr-4 py-3 border border-sand-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-botanical-500 focus:border-transparent"
-                        placeholder="John Doe"
-                      />
-                    </div>
-                  </div>
-                )}
-
                 {/* Email Field */}
                 <div>
                   <label className="block text-sm font-medium text-soil-700 mb-2">
@@ -196,11 +130,6 @@ export default function LoginPage() {
                       )}
                     </button>
                   </div>
-                  {!isLogin && (
-                    <p className="text-xs text-soil-500 mt-1">
-                      Must be at least 6 characters
-                    </p>
-                  )}
                 </div>
 
                 {/* Submit Button */}
@@ -211,28 +140,17 @@ export default function LoginPage() {
                   className="w-full"
                   disabled={loading}
                 >
-                  {loading
-                    ? 'Please wait...'
-                    : isLogin
-                    ? 'Sign In'
-                    : 'Create Account'}
+                  {loading ? 'Please wait...' : 'Sign In'}
                 </Button>
               </form>
 
               {/* Footer Links */}
               <div className="mt-6 text-center">
                 <p className="text-sm text-soil-600">
-                  {isLogin ? "Don't have an account? " : 'Already have an account? '}
-                  <button
-                    onClick={() => {
-                      setIsLogin(!isLogin);
-                      setError('');
-                      setSuccess('');
-                    }}
-                    className="text-botanical-600 hover:text-botanical-700 font-medium"
-                  >
-                    {isLogin ? 'Register here' : 'Login here'}
-                  </button>
+                  Don't have an account?{' '}
+                  <Link href="/register" className="text-botanical-600 hover:text-botanical-700 font-medium">
+                    Register as a Farmer
+                  </Link>
                 </p>
               </div>
             </div>
