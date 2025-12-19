@@ -1,0 +1,171 @@
+===============================================================================
+        VERCEL ENVIRONMENT VARIABLE SETUP - REQUIRED
+===============================================================================
+
+IMPORTANT: You MUST add this environment variable in Vercel for the frontend
+to connect to the backend properly!
+
+===============================================================================
+                    ENVIRONMENT VARIABLE TO ADD
+===============================================================================
+
+Variable Name:      NEXT_PUBLIC_API_URL
+Variable Value:     https://soil-guard.onrender.com
+Environment:        Production (and Preview if needed)
+
+===============================================================================
+                    HOW TO ADD IN VERCEL
+===============================================================================
+
+METHOD 1: Via Vercel Dashboard (Recommended)
+---------------------------------------------
+1. Go to https://vercel.com/dashboard
+2. Select your project: "soil-guard" or "SoilGuard"
+3. Click on "Settings" tab
+4. Click on "Environment Variables" in the left sidebar
+5. Add the variable:
+   - Key: NEXT_PUBLIC_API_URL
+   - Value: https://soil-guard.onrender.com
+   - Environment: Select "Production" (check the box)
+6. Click "Save"
+7. Go to "Deployments" tab
+8. Click "..." on latest deployment → "Redeploy"
+9. Wait for redeployment to complete (~2-3 minutes)
+
+METHOD 2: Via Vercel CLI (Alternative)
+--------------------------------------
+Run this command in your terminal:
+
+vercel env add NEXT_PUBLIC_API_URL production
+
+When prompted, enter: https://soil-guard.onrender.com
+
+Then redeploy:
+vercel --prod
+
+===============================================================================
+                    VERIFICATION STEPS
+===============================================================================
+
+After adding the environment variable and redeploying:
+
+1. Open your live site: https://soil-guard-livid.vercel.app
+2. Open browser Developer Tools (F12)
+3. Go to Console tab
+4. Try to login or use chat
+5. Check Network tab for API calls
+6. Verify calls are going to: https://soil-guard.onrender.com/api/...
+
+Expected Behavior:
+✓ Login should work
+✓ Chat should connect to AI
+✓ No CORS errors
+✓ API calls visible in Network tab pointing to Render backend
+
+===============================================================================
+                    CURRENT CONFIGURATION
+===============================================================================
+
+Frontend (Local):       Uses .env.local
+Frontend (Vercel):      Needs NEXT_PUBLIC_API_URL set in dashboard
+Backend (Render):       Already configured and running
+
+Local Files Already Configured:
+✓ .env.local             → NEXT_PUBLIC_API_URL=https://soil-guard.onrender.com
+✓ .env.production        → NEXT_PUBLIC_API_URL=https://soil-guard.onrender.com
+✓ src/lib/api.ts         → Uses process.env.NEXT_PUBLIC_API_URL
+
+Backend Already Configured:
+✓ CORS                   → Allows requests from Vercel domain
+✓ FRONTEND_URL           → Set in Render environment variables
+✓ All endpoints working  → Tested /api/health
+
+===============================================================================
+                    TROUBLESHOOTING
+===============================================================================
+
+Issue: "API calls failing after deployment"
+Fix: Verify NEXT_PUBLIC_API_URL is set in Vercel dashboard
+
+Issue: "CORS errors in browser console"
+Fix: Check that backend FRONTEND_URL includes your Vercel domain
+
+Issue: "Environment variable not working"
+Fix: Must redeploy after adding environment variables in Vercel
+
+Issue: "Chat not connecting to AI"
+Fix: 1. Verify Render backend is running (check https://soil-guard.onrender.com/api/health)
+     2. Verify OPENROUTER_API_KEY is set in Render
+     3. Check browser console for errors
+
+Quick Test Commands:
+-------------------
+# Test backend health
+curl https://soil-guard.onrender.com/api/health
+
+# Test from browser console (on live site)
+fetch(process.env.NEXT_PUBLIC_API_URL + '/api/health')
+  .then(r => r.json())
+  .then(d => console.log(d))
+
+# Expected output:
+{"success":true,"message":"SoilGuard API is running","timestamp":"..."}
+
+===============================================================================
+                    IMPORTANT NOTES
+===============================================================================
+
+1. NEXT_PUBLIC_ prefix is REQUIRED for client-side access in Next.js
+2. Environment variables without this prefix are only available server-side
+3. Changes to environment variables require redeployment to take effect
+4. Vercel automatically injects environment variables during build
+5. Local .env files are NOT deployed (they're in .gitignore)
+
+===============================================================================
+                    BACKEND ENDPOINTS IN USE
+===============================================================================
+
+Authentication:
+✓ POST /api/auth/register     - User registration
+✓ POST /api/auth/login        - User login
+✓ GET  /api/auth/me           - Get current user
+✓ PUT  /api/auth/profile      - Update profile
+
+Chat:
+✓ POST /api/chat              - Send message to AI
+✓ GET  /api/chat/history/:id  - Get chat history
+
+Health:
+✓ GET  /api/health            - Backend status check
+
+All endpoints are working and tested! ✅
+
+===============================================================================
+                    DEPLOYMENT STATUS
+===============================================================================
+
+Backend (Render):
+URL:        https://soil-guard.onrender.com
+Status:     ✅ Running
+Last Test:  Successful (health check passed)
+
+Frontend (Vercel):
+URL:        https://soil-guard-livid.vercel.app
+Status:     🟡 Needs environment variable
+Action:     Add NEXT_PUBLIC_API_URL in Vercel dashboard
+
+===============================================================================
+                    NEXT STEPS
+===============================================================================
+
+1. ✅ Backend is ready (no changes needed)
+2. ⚠️ Add NEXT_PUBLIC_API_URL in Vercel dashboard
+3. ⚠️ Redeploy frontend on Vercel
+4. ✅ Test login, chat, and other features
+5. ✅ Monitor for any errors in browser console
+
+===============================================================================
+
+Questions? Check browser console for errors or test backend health endpoint!
+
+===============================================================================
