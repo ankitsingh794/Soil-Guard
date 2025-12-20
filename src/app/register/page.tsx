@@ -198,7 +198,7 @@ export default function FarmerRegistrationPage() {
       localStorage.setItem('soilguard_user', JSON.stringify(response.user));
       
       setTimeout(() => {
-        router.push('/dashboard');
+        router.push('/');
       }, 2000);
     } catch (err: any) {
       setError(err.message || 'Registration failed. Please try again.');
